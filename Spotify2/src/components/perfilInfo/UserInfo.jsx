@@ -23,7 +23,7 @@ function UserInfo({ user_id }) {
       dispach({ type:reducerCases.SET_USER, userInfo });
       }
       getUserInfo();
-  }, [token, dispach]);
+  }, [token, dispach, user_id]);
 
 return(
   <Container>
