@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useStateProvider } from "../utils/StateProvider";
 import { reducerCases } from '../utils/Constants';
 import UserInfo from './perfilInfo/UserInfo';
+import TopTracks from './perfilInfo/TopTracks';
+import TopArtists from './perfilInfo/TopArtists';
 
 function MainPage() {
     const [{ token }, dispach] = useStateProvider();
@@ -31,6 +33,9 @@ function MainPage() {
     <Container>
         <p>ID: {userId?.userId}</p>
         <UserInfo user_id = {userId?.userId} />
+
+        <TopTracks/>
+        <TopArtists />
     </Container>
 );
 }

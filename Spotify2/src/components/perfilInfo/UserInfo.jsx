@@ -15,6 +15,9 @@ function UserInfo({ user_id }) {
           "Content-Type": "application/json",
           },
       });
+
+      //console.log(data);
+
       const userInfo = {
           userName: data.display_name,
           userFollowers: data.followers.total,
@@ -30,7 +33,7 @@ return(
       <p>User: {userInfo?.userName}</p>
       <p>Followers: {userInfo?.userFollowers}</p>
       <img
-        src={userInfo.userProfileImage}
+        src={userInfo?.userProfileImage}
         alt="spotify" />
   </Container>
 );

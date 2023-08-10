@@ -9,6 +9,8 @@ export const initialState = {
     playerState: false,
     selectedPlaylist: null,
     selectedPlaylistId: "37i9dQZF1E37jO8SiMT0yN",
+    topTracks: [],
+    topArtists: [],
 };
 
 const reducer = (state,action) => {
@@ -56,6 +58,16 @@ const reducer = (state,action) => {
           return {
             ...state,
             selectedPlaylistId: action.selectedPlaylistId,
+          };
+          case reducerCases.SET_TOP_TRACKS:
+          return {
+            ...state,
+            topTracks: action.topTracks,
+          };
+          case reducerCases.SET_TOP_ARTISTS:
+          return {
+            ...state,
+            topArtists: action.topArtists,
           };
         default:
             return state;
