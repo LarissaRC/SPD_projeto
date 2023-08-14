@@ -11,6 +11,7 @@ export const initialState = {
     selectedPlaylistId: "37i9dQZF1E37jO8SiMT0yN",
     topTracks: [],
     topArtists: [],
+    recentlyPlayed: [],
 };
 
 const reducer = (state,action) => {
@@ -68,6 +69,11 @@ const reducer = (state,action) => {
           return {
             ...state,
             topArtists: action.topArtists,
+          };
+          case reducerCases.SET_RECENTLY_PLAYED:
+          return {
+            ...state,
+            recentlyPlayed: action.recentlyPlayed,
           };
         default:
             return state;

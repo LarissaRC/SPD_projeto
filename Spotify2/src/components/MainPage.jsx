@@ -6,6 +6,8 @@ import { reducerCases } from '../utils/Constants';
 import UserInfo from './perfilInfo/UserInfo';
 import TopTracks from './perfilInfo/TopTracks';
 import TopArtists from './perfilInfo/TopArtists';
+import RecentlyPlayed from './perfilInfo/RecentlyPlayed';
+import ActiveTrack from './perfilInfo/ActiveTrack';
 
 function MainPage() {
     const [{ token }, dispach] = useStateProvider();
@@ -31,17 +33,47 @@ function MainPage() {
 
   return(
     <Container>
-        <p>ID: {userId?.userId}</p>
-        <UserInfo user_id = {userId?.userId} />
+        <div className="sidebar">
+            <div className="menu">
 
-        <TopTracks/>
-        <TopArtists />
+            </div>
+        </div>
+        <div className="body">
+            <p>ID: {userId?.userId}</p>
+            <UserInfo user_id = {userId?.userId} />
+
+            <TopTracks/>
+            <TopArtists />
+            <RecentlyPlayed />
+            <ActiveTrack />
+        </div>
+        <div className="right_side_bar">
+
+        </div>
     </Container>
 );
 }
 
 const Container = styled.div`
+    display: flex;
+    height: 100vh;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #32a852;
 
+    .body {
+        width: 60vw;
+        height: 90vh;
+        background-color: #fff;
+        overflow: auto;
+
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;
+    }
+
+    .body::-webkit-scrollbar {
+        display: none;
+    }
 `;
 
 export default MainPage;

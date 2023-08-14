@@ -15,13 +15,14 @@ function TopArtists() {
           "Content-Type": "application/json",
           },
       });
+      //console.log(response);
 
       const { items } = response.data;
       const topArtists = items.map(({ name, id }) => {
           return { name, id };
       });
 
-      console.log(topArtists);
+      //console.log(topArtists);
       
       dispach({ type:reducerCases.SET_TOP_ARTISTS, topArtists });
       }
