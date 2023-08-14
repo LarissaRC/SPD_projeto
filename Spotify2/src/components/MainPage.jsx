@@ -39,12 +39,14 @@ function MainPage() {
             </div>
         </div>
         <div className="body">
-            <p>ID: {userId?.userId}</p>
-            <UserInfo user_id = {userId?.userId} />
+            { /*<p>ID: {userId?.userId}</p> */}
 
+            <UserInfo user_id = {userId?.userId} />
+            <hr/>
+
+            <RecentlyPlayed />
             <TopTracks/>
             <TopArtists />
-            <RecentlyPlayed />
             <ActiveTrack />
         </div>
         <div className="right_side_bar">
@@ -60,6 +62,10 @@ const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     background-color: #32a852;
+
+    hr {
+        margin: 10px 20px;
+    }
 
     .body {
         width: 60vw;
