@@ -16,7 +16,7 @@ function RecentlyPlayed() {
           },
       });
 
-      console.log(response);
+      //console.log(response);
 
       const { items } = response.data;
 

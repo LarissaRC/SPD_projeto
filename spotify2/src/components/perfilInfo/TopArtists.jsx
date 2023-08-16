@@ -18,11 +18,20 @@ function TopArtists() {
       //console.log(response);
 
       const { items } = response.data;
-      const topArtists = items.map(({ name, id }) => {
-          return { name, id };
+      
+      let artists = [];
+      for(let i = 0; i < 4; i++) {
+        let name = items[i].name;
+        let id = items[i].id;
+        let image = items[i].images[1].url;
+        artists.push({ name, id, image});
+      }
+
+      const topArtists = artists.map(({ name, id, image }) => {
+          return { name, id, image };
       });
 
-      //console.log(topArtists);
+      console.log(topArtists);
       
       dispach({ type:reducerCases.SET_TOP_ARTISTS, topArtists });
       }
@@ -34,11 +43,11 @@ return(
     <h3>Artistas mais ouvidas</h3>
     <div className="artists">
     {
-        topArtists.map(({ name, id }) => {
+        topArtists.map(({ name, id, image }) => {
             return (
                 <div className="artist" key={id}>
                     <img
-                        src="https://i.scdn.co/image/ab67616d0000b273ba9d3d1bf1711c22915b68b8"
+                        src={image}
                         alt="artist"
                         className="artist_img" />
                     <span className="artist_name">{name}</span>

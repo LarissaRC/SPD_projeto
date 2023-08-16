@@ -22,7 +22,7 @@ export default function ActiveTrack() {
           id: response.data.item.id,
           name: response.data.item.name,
           artists: response.data.item.artists.map((artist) => artist.name),
-          image: response.data.item.album.images[2].url,
+          image: response.data.item.album.images[1].url,
         };
         dispatch({ type: reducerCases.SET_PLAYING, currentPlaying });
       } else {

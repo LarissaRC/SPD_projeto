@@ -69,6 +69,7 @@ const Container = styled.div`
       margin: 20px 10px;
       width: 100px;
       height: 100px;
+      border-radius: 50%;
   }
 
   .track_info {

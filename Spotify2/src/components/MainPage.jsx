@@ -1,17 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import axios from 'axios';
 import { useStateProvider } from "../utils/StateProvider";
 import { reducerCases } from '../utils/Constants';
-import UserInfo from './perfilInfo/UserInfo';
-import TopTracks from './perfilInfo/TopTracks';
-import TopArtists from './perfilInfo/TopArtists';
-import RecentlyPlayed from './perfilInfo/RecentlyPlayed';
-import ActiveTrack from './perfilInfo/ActiveTrack';
-import FavoriteTrack from './perfilInfo/FavoriteTrack';
-import ActualVibe from './perfilInfo/ActualVibe';
-import FavoriteArtist from './perfilInfo/FavoriteArtist';
-import FavoriteAlbum from './perfilInfo/FavoriteAlbum';
+import Perfil from './Home/Perfil';
+import Chat from './Home/Chat';
+import { BsFillChatRightFill } from "react-icons/bs";
+import { FaUserAlt } from "react-icons/fa";
+import { BiSolidMusic } from "react-icons/bi";
+import { BiWorld } from "react-icons/bi";
 
 function MainPage() {
     const [{ token }, dispach] = useStateProvider();
@@ -33,37 +30,43 @@ function MainPage() {
         getUserId();
     }, [dispach,token]);
 
-    const [{ userId }] = useStateProvider();
+    const [lastClicked, setLastClicked] = useState(1);
+    const [actuaComponent, setActuaComponent] = useState(1);
+
+    const handleButtonClick = (buttonNumber) => {
+        setLastClicked(buttonNumber);
+        setActuaComponent(buttonNumber);
+    };
 
   return(
     <Container>
         <div className="sidebar">
             <div className="menu">
-
+                <button className={`menu_button ${lastClicked === 1 ? 'active' : ''}`}
+                                    onClick={() => handleButtonClick(1)}>
+                    <FaUserAlt color={lastClicked === 1 ? 'white' : ''} />
+                    <span className="button_text">Perfil</span>
+                </button>
+                <button className={`menu_button ${lastClicked === 2 ? 'active' : ''}`}
+                                    onClick={() => handleButtonClick(2)}>
+                    <BsFillChatRightFill color={lastClicked === 2 ? 'white' : ''} />
+                    <span className="button_text">Conversas</span>
+                </button>
+                <button className={`menu_button ${lastClicked === 3 ? 'active' : ''}`}
+                                    onClick={() => handleButtonClick(3)}>
+                    <BiSolidMusic color={lastClicked === 3 ? 'white' : ''} />
+                    <span className="button_text">Recomendações</span>
+                </button>
+                <button className={`menu_button ${lastClicked === 4 ? 'active' : ''}`}
+                                    onClick={() => handleButtonClick(4)}>
+                    <BiWorld color={lastClicked === 4 ? 'white' : ''} />
+                    <span className="button_text">Sobre nós</span>
+                </button>
             </div>
         </div>
         <div className="body">
-            { /*<p>ID: {userId?.userId}</p> */}
-
-            <UserInfo user_id = {userId?.userId} />
-            <hr/>
-
-            <RecentlyPlayed />
-
-            <div className="big_cards">
-                <FavoriteTrack />
-                <ActualVibe />
-            </div>
-
-            <TopTracks/>
-            <TopArtists />
-
-            <div className="big_cards">
-                <FavoriteArtist />
-                <FavoriteAlbum />
-            </div>
-
-            <ActiveTrack />
+            { actuaComponent === 1 && <Perfil /> }
+            { actuaComponent === 2 && <Chat /> }
         </div>
         <div className="right_side_bar">
 
@@ -75,12 +78,43 @@ function MainPage() {
 const Container = styled.div`
     display: flex;
     height: 100vh;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     background-color: #32a852;
 
     hr {
         margin: 10px 20px;
+    }
+
+    .sidebar {
+        display: flex;
+        align-itens: center;
+    }
+
+    .menu_button {
+        display: flex;
+        align-items: center;
+        align-self: center;
+        width: 200px;
+        height: 40px;
+        margin: 10px 0;
+
+        border-radius: 8px;
+        cursor: pointer;
+        border-style: none;
+    }
+
+    .active {
+        background-color: #292929;
+    }
+
+    .active span {
+        color: #fff;
+    }
+
+    .button_text {
+        font-size: 20px;
+        margin-left: 10px;
     }
 
     .body {
@@ -91,6 +125,8 @@ const Container = styled.div`
 
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;
+
+        border-radius: 10px;
     }
 
     .body::-webkit-scrollbar {

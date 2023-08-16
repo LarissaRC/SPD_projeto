@@ -15,13 +15,23 @@ function TopTracks() {
           "Content-Type": "application/json",
           },
       });
+      //console.log(response);
 
       const { items } = response.data;
-      const topTracks = items.map(({ name, id }) => {
-          return { name, id };
+
+      let tracks = [];
+      for(let i = 0; i < 4; i++) {
+        let name = items[i].name;
+        let id = items[i].id;
+        let image = items[i].album.images[1].url;
+        tracks.push({ name, id, image});
+      }
+
+      const topTracks = tracks.map(({ name, id, image }) => {
+          return { name, id, image };
       });
 
-      //console.log(topTracks);
+      console.log(topTracks);
       
       dispach({ type:reducerCases.SET_TOP_TRACKS, topTracks });
       }
@@ -33,11 +43,11 @@ return(
     <h3>Músicas mais ouvidas</h3>
     <div className="tracks">
     {
-        topTracks.map(({ name, id }) => {
+        topTracks.map(({ name, id, image }) => {
             return (
                 <div className="track" key={id}>
                     <img
-                        src="https://i.scdn.co/image/ab67616d0000b273ba9d3d1bf1711c22915b68b8"
+                        src={image}
                         alt="track album"
                         className="album_img" />
                     <span className="track_name">{name}</span>

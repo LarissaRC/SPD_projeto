@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useStateProvider } from '../../utils/StateProvider';
 import { reducerCases } from '../../utils/Constants';
 
-function AtualGenres() {
+function ActualGenres() {
   const [{ token, recentlyPlayed }, dispach] = useStateProvider();
   useEffect(() => {
       const getRecentlyPlayed = async() => {
@@ -16,7 +16,7 @@ function AtualGenres() {
           },
       });
 
-      console.log(response);
+      //console.log(response);
 
       const { items } = response.data;
 
@@ -40,25 +40,25 @@ function AtualGenres() {
       getRecentlyPlayed();
   }, [token, dispach]);
 
-  const genres = ["Pop", "K-pop", "Indie-pop", "Pop Rock", "MPB"];
-
 return(
   <Container>
     <h3>Gêneros musicais mais ouvidos ultimamente</h3>
     <div className="genres">
-    {
-        recentlyPlayed.map(({ name, id, image }) => {
-            return (
-                <div className="track" key={id}>
-                    <img
-                        src={image}
-                        alt="track album"
-                        className="album_img" />
-                    <span className="track_name">{name}</span>
-                </div>
-            )
-        })
-    }
+        <div className="genre">
+            <span className="genre_name">Pop</span>
+        </div>
+        <div className="genre">
+            <span className="genre_name">Indie Pop</span>
+        </div>
+        <div className="genre">
+            <span className="genre_name">Rock Pop</span>
+        </div>
+        <div className="genre">
+            <span className="genre_name">J-Pop</span>
+        </div>
+        <div className="genre">
+            <span className="genre_name">City Pop</span>
+        </div>
     </div>
   </Container>
 );
@@ -71,28 +71,20 @@ const Container = styled.div`
         display: flex;
         justify-content: space-around;
         align-itens: center;
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
     }
-
-    .track {
-        width: 140px;
-        height: 170px;
-        justify-content: center;
-        align-itens: center;
-
-        border: 2px #888 solid;
-        border-radius: 15px;
-    }
-
-    .album_img {
-        display: flex;
-        margin: 10px auto;
-        width: 100px;
-        height: 100px;
-    }
-
-    .track_name {
-        display: flex;
+    
+    .genre {
+    text-align: center;
+    justify-content: center;
+    background-color: #79db8b;
+    border: 2px #000 solid;
+    border-radius: 8px;
+    width: 100px;
+    height: 30px;
     }
 `;
 
-export default AtualGenres;
+export default ActualGenres;
