@@ -33,24 +33,48 @@ export default function ActiveTrack() {
   }, [token, dispatch]);
   return (
     <Container>
-        <p>Tocando agora: </p>
-        {currentPlaying ? (
+      {currentPlaying ? (
+      <div>
+        <h3>Usuário já está sintonizado de novo</h3>
+          <div className="track">
+            <img
+                src={currentPlaying.image}
+                alt="track album"
+                className="album_img" />
+            <span className="track_name">{currentPlaying.name}</span>
+            <span className="artists_name">{currentPlaying.artists.join(", ")}</span>
+          </div>
+      </div>
+      ) : (
         <div>
-            <img src={currentPlaying.image} alt="currentPlaying" />
-            <h4>{currentPlaying.name}</h4>
-            <h6>
-                {currentPlaying.artists.join(", ")}
-            </h6>
+            <h3>Usuário não está ouvindo nada por hora</h3>
         </div>
-        ) : (
-            <div>
-                <p>Nada por hora ;-;</p>
-            </div>
-        )}
+      )}
     </Container>
   );
 }
 
 const Container = styled.div`
-  
+  margin: 0 20px;
+
+  .track {
+      width: 140px;
+      height: 170px;
+      justify-content: center;
+      align-itens: center;
+
+      border: 2px #888 solid;
+      border-radius: 15px;
+  }
+
+  .album_img {
+      display: flex;
+      margin: 10px auto;
+      width: 100px;
+      height: 100px;
+  }
+
+  .track_name {
+      display: flex;
+  }
 `;

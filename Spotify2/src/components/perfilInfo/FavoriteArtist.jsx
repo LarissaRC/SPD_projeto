@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useStateProvider } from '../../utils/StateProvider';
 import { reducerCases } from '../../utils/Constants';
 
-function TopTracks() {
+function FavoriteArtist() {
   const [{ token, topTracks }, dispach] = useStateProvider();
   useEffect(() => {
       const getUserTopTracks = async() => {
@@ -30,21 +30,18 @@ function TopTracks() {
 
 return(
   <Container>
-    <h3>Músicas mais ouvidas</h3>
-    <div className="tracks">
-    {
-        topTracks.map(({ name, id }) => {
-            return (
-                <div className="track" key={id}>
-                    <img
-                        src="https://i.scdn.co/image/ab67616d0000b273ba9d3d1bf1711c22915b68b8"
-                        alt="track album"
-                        className="album_img" />
-                    <span className="track_name">{name}</span>
-                </div>
-            )
-        })
-    }
+    <h3>Artista favorito</h3>
+    <div className="track">
+        <div className="track_image">
+            <img
+                src="https://i.scdn.co/image/ab67616d0000b273ba9d3d1bf1711c22915b68b8"
+                alt="track album"
+                className="album_img" />
+        </div>
+        <div className="track_info">
+            <p className="track_name">Nome da música aaaaa</p>
+            <p className="artist_name">Artistas aaaaa</p>
+        </div>
     </div>
   </Container>
 );
@@ -52,33 +49,36 @@ return(
 
 const Container = styled.div`
   margin: 0 20px;
-
-  .tracks {
-      display: flex;
-      justify-content: space-around;
-      align-itens: center;
-  }
+  width: 50%;
 
   .track {
-      width: 140px;
-      height: 170px;
-      justify-content: center;
-      align-itens: center;
+    width: 300px;
+    height: 140px;
+    display: flex;
+    justify-content: space-between;
 
-      border: 2px #888 solid;
-      border-radius: 15px;
+    border: 2px #888 solid;
+    border-radius: 15px;
+  }
+
+  .track_image {
+    width: 40%;
   }
 
   .album_img {
-      display: flex;
-      margin: 10px auto;
+      margin: 20px 10px;
       width: 100px;
       height: 100px;
   }
 
+  .track_info {
+    width: 60%;
+    align-self: center;
+  }
+
   .track_name {
-      display: flex;
+
   }
 `;
 
-export default TopTracks;
+export default FavoriteArtist;

@@ -8,6 +8,10 @@ import TopTracks from './perfilInfo/TopTracks';
 import TopArtists from './perfilInfo/TopArtists';
 import RecentlyPlayed from './perfilInfo/RecentlyPlayed';
 import ActiveTrack from './perfilInfo/ActiveTrack';
+import FavoriteTrack from './perfilInfo/FavoriteTrack';
+import ActualVibe from './perfilInfo/ActualVibe';
+import FavoriteArtist from './perfilInfo/FavoriteArtist';
+import FavoriteAlbum from './perfilInfo/FavoriteAlbum';
 
 function MainPage() {
     const [{ token }, dispach] = useStateProvider();
@@ -45,8 +49,20 @@ function MainPage() {
             <hr/>
 
             <RecentlyPlayed />
+
+            <div className="big_cards">
+                <FavoriteTrack />
+                <ActualVibe />
+            </div>
+
             <TopTracks/>
             <TopArtists />
+
+            <div className="big_cards">
+                <FavoriteArtist />
+                <FavoriteAlbum />
+            </div>
+
             <ActiveTrack />
         </div>
         <div className="right_side_bar">
@@ -79,6 +95,11 @@ const Container = styled.div`
 
     .body::-webkit-scrollbar {
         display: none;
+    }
+
+    .big_cards {
+        display: flex;
+        justify-content: space-between;
     }
 `;
 
