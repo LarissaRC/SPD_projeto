@@ -61,6 +61,22 @@ function Perfil() {
         </div>
 
         <ActiveTrack />
+
+        {
+            /*
+            <iframe
+                title="Spotify Embed: Recommendation Playlist "
+                src={`https://open.spotify.com/embed/playlist/06Vpoha8S7rDRk8VtRKDl2?utm_source=generator&theme=0`}
+                width="70%"
+                height="500px"
+                style={{ minHeight: '360px' }}
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+            />
+            */
+        }
+        
     </Container>
 );
 }
