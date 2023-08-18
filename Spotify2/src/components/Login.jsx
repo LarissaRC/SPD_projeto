@@ -24,8 +24,8 @@ function Login() {
     return(
     <Container>
         <img
-            src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_White.png"
-            alt="spotify" />
+            src="https://media.discordapp.net/attachments/1140720087108694150/1141799784760484040/spdfy.png?width=275&height=173"
+            alt="spdfy" />
         <button onClick={handleClick}>Connect Spotify</button>
     </Container>
     );
@@ -38,7 +38,7 @@ const Container = styled.div`
     justify-content: center;
     height: 100vh;
     width: 100vw;
-    background-color: #1db954;
+    background-color: #292929;
     gap: 5rem;
     img {
         height: 20vh;
@@ -47,7 +47,7 @@ const Container = styled.div`
         padding: 1rem 5rem;
         border-radius: 5rem;
         border: none;
-        background-color: black;
+        background-color: white;
         color: #49f585;
         font-size: 1.4rem;
         cursor: pointer;

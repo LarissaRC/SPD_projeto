@@ -9,6 +9,7 @@ import { BsFillChatRightFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
 import { BiSolidMusic } from "react-icons/bi";
 import { BiWorld } from "react-icons/bi";
+import Discover from './Home/Discover';
 
 function MainPage() {
     const [{ token }, dispach] = useStateProvider();
@@ -67,6 +68,7 @@ function MainPage() {
         <div className="body">
             { actuaComponent === 1 && <Perfil /> }
             { actuaComponent === 2 && <Chat /> }
+            { actuaComponent === 3 && <Discover /> }
         </div>
         <div className="right_side_bar">
 
