@@ -1,11 +1,17 @@
-import React, {useEffect} from 'react';
-import Login from "./components/Login";
+import React, {useEffect, useContext} from 'react';
 import { useStateProvider } from "./utils/StateProvider";
 import { reducerCases } from './utils/Constants';
-import Spotify2 from './components/Spotify2';
 import MainPage from './components/MainPage';
 
+import "./style.scss"
+import { Register } from './pages/Register';
+import { Home } from './pages/Home';
+import { Login } from "./pages/Login";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthContext } from "./context/AuthContext";
+
 function App() {
+  /*
   const [{ token }, dispatch ] = useStateProvider();
 
   useEffect(() => {
@@ -15,13 +21,43 @@ function App() {
       dispatch({ type:reducerCases.SET_TOKEN, token })
     }
   },[token, dispatch])
+  */
+
+  // Chat only
+  const { currentUser } = useContext(AuthContext);
+
+  const ProtectedRoute = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to="/login" />;
+    }
+
+    return children
+  };
 
   return(
     <div>
-      { /*token ? <Spotify2 /> : <Login />*/ }
-      { token ? <MainPage /> : <Login /> }
+      { /*token ? <MainPage /> : <Login />*/ }
+
+      {
+        <BrowserRouter>
+          <Routes>
+            <Route path="/">
+              <Route
+                index
+                element={
+                  <ProtectedRoute>
+                    <Home />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Register />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      }
     </div>
-  )
+  );
 }
 
 export default App;
