@@ -72,7 +72,7 @@
 }
 
 .home {
-    height: 100vh;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -201,7 +201,7 @@
             .messages {
                 background-color: #c2ffc0;
                 padding: 10px;
-                height: calc(100% - 220px);
+                height: calc(100% - 160px);
                 overflow: scroll;
 
                 .message {
