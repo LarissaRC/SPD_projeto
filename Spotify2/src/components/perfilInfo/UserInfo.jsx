@@ -3,27 +3,44 @@ import styled from "styled-components";
 import axios from 'axios';
 import { useStateProvider } from '../../utils/StateProvider';
 import { reducerCases } from '../../utils/Constants';
+import { db } from '../../firebase';
+import { doc, setDoc } from "firebase/firestore";
 
 function UserInfo({ user_id }) {
   const [{ token, userInfo }, dispach] = useStateProvider();
   useEffect(() => {
       const getUserInfo = async() => {
-      const { data } = await axios.get(`https://api.spotify.com/v1/users/${user_id}`,
-      {
-          headers: {
-          Authorization: "Bearer " + token,
-          "Content-Type": "application/json",
-          },
-      });
+        const { data } = await axios.get(`https://api.spotify.com/v1/users/${user_id}`,
+        {
+            headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+            },
+        });
 
-      //console.log(data);
+        //console.log(data);
 
-      const userInfo = {
-          userName: data.display_name,
-          userFollowers: data.followers.total,
-          userProfileImage: data.images[1].url,
-      };
-      dispach({ type:reducerCases.SET_USER, userInfo });
+        const userInfo = {
+            userName: data?.display_name,
+            userProfileImage: data?.images[1].url,
+        };
+        dispach({ type:reducerCases.SET_USER, userInfo });
+
+        //console.log(userInfo.userName + userInfo.userProfileImage);
+
+        if(userInfo.userName && userInfo.userProfileImage){
+          //create user on firestore
+          await setDoc(doc(db, "users", user_id), {
+            uid: user_id,
+            userName: userInfo?.userName,
+            userProfileImage: userInfo?.userProfileImage,
+          });
+          console.log("foi 1");
+
+          //create empty user chats on firestore
+          await setDoc(doc(db, "userChats", user_id), {});
+          console.log("foi 2");
+        }
       }
       getUserInfo();
   }, [token, dispach, user_id]);
@@ -31,11 +48,11 @@ function UserInfo({ user_id }) {
 return(
   <Container>
     <img
-      src={userInfo?.userProfileImage}
+      src={userInfo?.userProfileImage || ''}
       alt="spotify"
       className="user_image" />
     <div className="user_info">
-      <p className="user_name">{userInfo?.userName}</p>
+      <p className="user_name">{userInfo?.userName || 'Nome de usuário não encontrado'}</p>
       { /*<p>Followers: {userInfo?.userFollowers}</p>*/ }
 
       <p className="user_bio">Descrição breve que o usuário deseja dar àqueles que forem dar uma olhada no seu perfil. Tipo: amante de música, kpoper raiz, adepto ao samba, etc etc.</p>

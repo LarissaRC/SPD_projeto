@@ -72,29 +72,27 @@
 }
 
 .home {
-    background-color: #a7bcff;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
 
     .container {
-        border: 1px solid white;
-        border-radius: 10px;
-        width: 65%;
-        height: 80%;
         display: flex;
         overflow: hidden;
+        height: 100%;
+        width: 100%;
 
         .sidebar {
             flex: 1;
-            background-color: #3e3c61;
+            background-color: #363636;
             position: relative;
+            display: block;
 
             .navbar {
                 display: flex;
                 align-items: center;
-                background-color: #2f2d52;
+                background-color: #292929;
                 height: 50px;
                 padding: 10px;
                 justify-content: space-between;
@@ -153,7 +151,7 @@
                 cursor: pointer;
 
                 &:hover {
-                    background-color: #2f2d52;
+                    background-color: #242424;
                 }
 
                 img {
@@ -182,7 +180,7 @@
 
             .chatInfo {
                 height: 50px;
-                background-color: #5d5b8d;
+                background-color: #383838;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
@@ -201,9 +199,9 @@
             }
 
             .messages {
-                background-color: #ddddf7;
+                background-color: #c2ffc0;
                 padding: 10px;
-                height: calc(100% - 160px);
+                height: calc(100% - 220px);
                 overflow: scroll;
 
                 .message {
@@ -291,7 +289,7 @@
                     border: none;
                     padding: 10px 15px;
                     color: white;
-                    background-color: #8da4f1;
+                    background-color: #3b3b3b;
                     cursor: pointer;
                 }
             }

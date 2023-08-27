@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useStateProvider } from "../utils/StateProvider";
 import { reducerCases } from '../utils/Constants';
 import Perfil from './Home/Perfil';
-import Chat from './Home/Chat';
+import ChatScreen from './Home/ChatScreen';
 import { BsFillChatRightFill } from "react-icons/bs";
 import { FaUserAlt } from "react-icons/fa";
 import { BiSolidMusic } from "react-icons/bi";
@@ -67,7 +67,7 @@ function MainPage() {
         </div>
         <div className="body">
             { actuaComponent === 1 && <Perfil /> }
-            { actuaComponent === 2 && <Chat /> }
+            { actuaComponent === 2 && <ChatScreen /> }
             { actuaComponent === 3 && <Discover /> }
         </div>
         <div className="right_side_bar">

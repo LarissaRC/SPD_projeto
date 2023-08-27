@@ -18,8 +18,9 @@ const Search = () => {
   const [user, setUser] = useState(null);
   const [err, setErr] = useState(false);
 
-  const { currentUser } = useContext(AuthContext);
+  //const { currentUser } = useContext(AuthContext);
 
+  /*
   const handleSearch = async () => {
     const q = query(
       collection(db, "users"),
@@ -77,20 +78,26 @@ const Search = () => {
     setUser(null);
     setUsername("")
   };
+  */
+
   return (
     <div className="search">
       <div className="searchForm">
-        <input
+        {/*<input
           type="text"
           placeholder="Find a user"
           onKeyDown={handleKey}
           onChange={(e) => setUsername(e.target.value)}
           value={username}
+        />*/}
+        <input
+          type="text"
+          placeholder="Find a user"
         />
       </div>
       {err && <span>User not found!</span>}
       {user && (
-        <div className="userChat" onClick={handleSelect}>
+        <div className="userChat">
           <img src={user.photoURL} alt="" />
           <div className="userChatInfo">
             <span>{user.displayName}</span>

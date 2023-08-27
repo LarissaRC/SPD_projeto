@@ -3,32 +3,38 @@ import { AuthContext } from "../../context/AuthContext";
 import { ChatContext } from "../../context/ChatContext";
 
 const Message = ({ message }) => {
-  const { currentUser } = useContext(AuthContext);
+  /*const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
   const ref = useRef();
 
   useEffect(() => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
-  }, [message]);
+  }, [message]);*/
 
-  return (
-    <div ref={ref}
+    {/*<div ref={ref}
       className={`message ${message.senderId === currentUser.uid && "owner"}`}
+    >*/}
+  return (
+    <div
+    className={`message`}
     >
       <div className="messageInfo">
-        <img src={
+        {/*<img src={
             message.senderId === currentUser.uid
               ? currentUser.photoURL
               : data.user.photoURL
           }
+          alt=""
+        />*/}
+        <img src="data:image/jpeg;base64,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"
           alt=""
         />
         <span>Just now</span>
       </div>
       <div className="messageContent">
         <p>{message.text}</p>
-        {message.img && <img src={message.img} alt="" />}
+        {/*message.img && <img src={message.img} alt="" />*/}
       </div>
     </div>
   )

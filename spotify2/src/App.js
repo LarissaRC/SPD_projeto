@@ -2,16 +2,17 @@ import React, {useEffect, useContext} from 'react';
 import { useStateProvider } from "./utils/StateProvider";
 import { reducerCases } from './utils/Constants';
 import MainPage from './components/MainPage';
+import Login from './components/Login';
 
 import "./style.scss"
 import { Register } from './pages/Register';
 import { Home } from './pages/Home';
-import { Login } from "./pages/Login";
+import { ChatLogin } from "./pages/ChatLogin";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 
 function App() {
-  /*
+  
   const [{ token }, dispatch ] = useStateProvider();
 
   useEffect(() => {
@@ -21,8 +22,7 @@ function App() {
       dispatch({ type:reducerCases.SET_TOKEN, token })
     }
   },[token, dispatch])
-  */
-
+/*
   // Chat only
   const { currentUser } = useContext(AuthContext);
 
@@ -33,12 +33,12 @@ function App() {
 
     return children
   };
-
+*/
   return(
     <div>
-      { /*token ? <MainPage /> : <Login />*/ }
+      { token ? <MainPage /> : <Login /> }
 
-      {
+      {/*
         <BrowserRouter>
           <Routes>
             <Route path="/">
@@ -50,12 +50,13 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route path="login" element={<Login />} />
+              <Route path="login" element={<ChatLogin />} />
               <Route path="register" element={<Register />} />
             </Route>
           </Routes>
         </BrowserRouter>
-      }
+      
+      */}
     </div>
   );
 }

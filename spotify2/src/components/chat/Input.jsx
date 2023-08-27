@@ -15,6 +15,7 @@ import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const Input = () => {
+  /*
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
 
@@ -73,27 +74,37 @@ const Input = () => {
     setText("");
     setImg(null);
   };
-
+*/
   return (
     <div className='input'>
-      <input
+      {/*<input
         type="text"
         placeholder='Type something...'
         onChange={(e) => setText(e.target.value)}
         value={text}
+      />*/}
+      <input
+        type="text"
+        placeholder='Type something...'
       />
       <div className="send">
         <img src={Attach} alt="" />
-        <input
+        {/*<input
           type="file"
           style={{display:"none"}}
           id="file"
           onChange={(e) => setImg(e.target.files[0])}
+        />*/}
+        <input
+          type="file"
+          style={{display:"none"}}
+          id="file"
         />
         <label htmlFor="file">
           <img src={Img} alt="" />
         </label>
-        <button onClick={handleSend}>Send</button>
+        {/*<button onClick={handleSend}>Send</button>*/}
+        <button>Send</button>
       </div>
     </div>
   )

@@ -7,12 +7,12 @@ import Input from './Input';
 import { ChatContext } from "../../context/ChatContext";
 
 function Chat() {
-  const { data } = useContext(ChatContext);
+  //const { data } = useContext(ChatContext);
 
   return (
     <div className='chat'>
       <div className="chatInfo">
-        <span>{data.user?.displayName}</span>
+        <span>{/*data.user?.displayName*/}Nome aí</span>
         <div className="chatIcons">
           <img src={Cam} alt="" />
           <img src={Add} alt="" />

@@ -31,7 +31,7 @@ function TopArtists() {
           return { name, id, image };
       });
 
-      console.log(topArtists);
+      //console.log(topArtists);
       
       dispach({ type:reducerCases.SET_TOP_ARTISTS, topArtists });
       }

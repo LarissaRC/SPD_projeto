@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
-export const Login = () => {
+export const ChatLogin = () => {
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
 

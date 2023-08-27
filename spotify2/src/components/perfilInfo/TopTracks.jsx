@@ -31,7 +31,7 @@ function TopTracks() {
           return { name, id, image };
       });
 
-      console.log(topTracks);
+      //console.log(topTracks);
       
       dispach({ type:reducerCases.SET_TOP_TRACKS, topTracks });
       }
