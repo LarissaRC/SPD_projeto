@@ -13,6 +13,8 @@ export const initialState = {
     topArtists: [],
     recentlyPlayed: [],
     selectedChatUser: null,
+    recommendedTracks: [],
+    recommendedArtists: [],
 };
 
 const reducer = (state,action) => {
@@ -80,6 +82,16 @@ const reducer = (state,action) => {
           return {
             ...state,
             selectedChatUser: action.selectedChatUser,
+          }
+          case reducerCases.SET_RECOMMENDED_TRACKS:
+          return {
+            ...state,
+            recommendedTracks: action.recommendedTracks,
+          }
+          case reducerCases.SET_RECOMMENDED_ARTISTS:
+          return {
+            ...state,
+            recommendedArtists: action.recommendedArtists,
           }
         default:
             return state;
