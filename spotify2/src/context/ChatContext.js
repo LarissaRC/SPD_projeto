@@ -3,12 +3,12 @@ import {
   useContext,
   useReducer,
 } from "react";
-import { AuthContext } from "./AuthContext";
+import { useAuth } from "./AuthContext";
 
 export const ChatContext = createContext();
 
 export const ChatContextProvider = ({ children }) => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useAuth();
   const INITIAL_STATE = {
     chatId: "null",
     user: {},
