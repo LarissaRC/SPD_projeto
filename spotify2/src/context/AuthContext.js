@@ -1,25 +1,16 @@
 import { createContext, useEffect, useState } from "react";
-import { auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import FirebaseService from '../firebase'
+import axios from 'axios';
+import { useStateProvider } from "../utils/StateProvider";
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState({});
-
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-      console.log(user);
-    });
-
-    return () => {
-      unsub();
-    };
-  }, []);
+  const [user, setUser] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   return (
-    <AuthContext.Provider value={{ currentUser }}>
+    <AuthContext.Provider value={{ user }}>
       {children}
     </AuthContext.Provider>
   );

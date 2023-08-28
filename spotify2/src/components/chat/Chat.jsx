@@ -5,19 +5,16 @@ import More from "../../img/more.png";
 import Messages from './Messages';
 import Input from './Input';
 import { ChatContext } from "../../context/ChatContext";
+import { useUser } from '../../context/UserContext';
 
-function Chat() {
+function Chat({ currentUser }) {
   //const { data } = useContext(ChatContext);
+  const { userInfo } = useUser();
 
   return (
     <div className='chat'>
       <div className="chatInfo">
-        <span>{/*data.user?.displayName*/}Nome aí</span>
-        <div className="chatIcons">
-          <img src={Cam} alt="" />
-          <img src={Add} alt="" />
-          <img src={More} alt="" />
-        </div>
+        <span>{userInfo?.userName}</span>
       </div>
       <Messages />
       <Input />

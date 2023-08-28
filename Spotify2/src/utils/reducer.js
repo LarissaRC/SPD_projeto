@@ -12,6 +12,7 @@ export const initialState = {
     topTracks: [],
     topArtists: [],
     recentlyPlayed: [],
+    selectedChatUser: null,
 };
 
 const reducer = (state,action) => {
@@ -75,6 +76,11 @@ const reducer = (state,action) => {
             ...state,
             recentlyPlayed: action.recentlyPlayed,
           };
+          case reducerCases.SET_SELECTED_CHAT:
+          return {
+            ...state,
+            selectedChatUser: action.selectedChatUser,
+          }
         default:
             return state;
     }

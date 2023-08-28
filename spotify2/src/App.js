@@ -3,6 +3,7 @@ import { useStateProvider } from "./utils/StateProvider";
 import { reducerCases } from './utils/Constants';
 import MainPage from './components/MainPage';
 import Login from './components/Login';
+import { UserProvider } from './context/UserContext';
 
 import "./style.scss"
 import { Register } from './pages/Register';
@@ -36,7 +37,9 @@ function App() {
 */
   return(
     <div>
-      { token ? <MainPage /> : <Login /> }
+      <UserProvider>
+        { token ? <MainPage /> : <Login /> }
+      </UserProvider>
 
       {/*
         <BrowserRouter>

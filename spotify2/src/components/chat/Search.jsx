@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   collection,
   query,
@@ -11,54 +11,11 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase";
-import axios from 'axios';
-import { useStateProvider } from "../../utils/StateProvider";
-import FirebaseService from '../../firebase'
 
-const Search = () => {
+const Search = ({ currentUser }) => {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [userId, setUserId] = useState(null);
   const [err, setErr] = useState(false);
-
-  const [{ token }, dispach] = useStateProvider();
-    useEffect(() => {
-        
-    }, [dispach,token]);
-
-  useEffect(() => {
-    const getUserId = async() => {
-    const { data } = await axios.get('https://api.spotify.com/v1/me',
-    {
-        headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
-        },
-    });
-    setUserId(data.id);
-    }
-    getUserId();
-
-    // Crie uma instância da classe FirebaseService
-    const firebaseService = new FirebaseService();
-
-    // Chame o método para recuperar o usuário por ID
-    firebaseService.getUserById(userId)
-      .then((userData) => {
-        // Verifique se o usuário foi encontrado
-        if (userData) {
-          setCurrentUser(userData);
-          //console.log(userData);
-        } else {
-          // Trate o caso em que o usuário não foi encontrado
-          console.log('Usuário não encontrado');
-        }
-      })
-      .catch((error) => {
-        console.error('Erro ao recuperar usuário:', error);
-      });
-  }, [userId]);
 
   const handleSearch = async () => {
     const q = query(
@@ -90,6 +47,7 @@ const Search = () => {
       const res = await getDoc(doc(db, "chats", combinedId));
 
       if (!res.exists()) {
+        console.log("Não existe");
         //create a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
 
@@ -111,8 +69,12 @@ const Search = () => {
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
+      } else {
+        console.log("Existe");
       }
-    } catch (err) {}
+    } catch (err) {
+      console.log("Nem foi " + err);
+    }
 
     setUser(null);
     setUsername("")

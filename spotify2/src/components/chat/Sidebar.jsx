@@ -3,12 +3,12 @@ import Navbar from "./Navbar";
 import Search from "./Search";
 import Chats from "./Chats";
 
-function Sidebar() {
+function Sidebar({ currentUser }) {
   return (
     <div className='sidebar'>
-      <Navbar />
-      <Search />
-      <Chats />
+      <Navbar currentUser={currentUser}/>
+      <Search currentUser={currentUser}/>
+      <Chats currentUser={currentUser}/>
     </div>
   )
 }
