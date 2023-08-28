@@ -1,14 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
-import {signOut} from "firebase/auth"
-import { auth } from '../../firebase'
-import { AuthContext } from '../../context/AuthContext'
+import React, { useEffect, useState } from 'react'
 import FirebaseService from '../../firebase'
 import axios from 'axios';
 import { useStateProvider } from "../../utils/StateProvider";
-import { reducerCases } from '../../utils/Constants';
 
 function Navbar() {
-  //const {currentUser} = useContext(AuthContext)
   const [user, setUser] = useState(null);
   const [userId, setUserId] = useState(null);
 

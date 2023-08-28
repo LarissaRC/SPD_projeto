@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   collection,
   query,
@@ -11,20 +11,59 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase";
-import { AuthContext } from "../../context/AuthContext";
+import axios from 'axios';
+import { useStateProvider } from "../../utils/StateProvider";
+import FirebaseService from '../../firebase'
 
 const Search = () => {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [err, setErr] = useState(false);
 
-  //const { currentUser } = useContext(AuthContext);
+  const [{ token }, dispach] = useStateProvider();
+    useEffect(() => {
+        
+    }, [dispach,token]);
 
-  /*
+  useEffect(() => {
+    const getUserId = async() => {
+    const { data } = await axios.get('https://api.spotify.com/v1/me',
+    {
+        headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+        },
+    });
+    setUserId(data.id);
+    }
+    getUserId();
+
+    // Crie uma instância da classe FirebaseService
+    const firebaseService = new FirebaseService();
+
+    // Chame o método para recuperar o usuário por ID
+    firebaseService.getUserById(userId)
+      .then((userData) => {
+        // Verifique se o usuário foi encontrado
+        if (userData) {
+          setCurrentUser(userData);
+          //console.log(userData);
+        } else {
+          // Trate o caso em que o usuário não foi encontrado
+          console.log('Usuário não encontrado');
+        }
+      })
+      .catch((error) => {
+        console.error('Erro ao recuperar usuário:', error);
+      });
+  }, [userId]);
+
   const handleSearch = async () => {
     const q = query(
       collection(db, "users"),
-      where("displayName", "==", username)
+      where("userName", "==", username)
     );
 
     try {
@@ -58,8 +97,8 @@ const Search = () => {
         await updateDoc(doc(db, "userChats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
             uid: user.uid,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
+            userName: user.userName,
+            userProfileImage: user.userProfileImage,
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
@@ -67,8 +106,8 @@ const Search = () => {
         await updateDoc(doc(db, "userChats", user.uid), {
           [combinedId + ".userInfo"]: {
             uid: currentUser.uid,
-            displayName: currentUser.displayName,
-            photoURL: currentUser.photoURL,
+            userName: currentUser.userName,
+            userProfileImage: currentUser.userProfileImage,
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
@@ -78,29 +117,24 @@ const Search = () => {
     setUser(null);
     setUsername("")
   };
-  */
 
   return (
     <div className="search">
       <div className="searchForm">
-        {/*<input
+        <input
           type="text"
           placeholder="Find a user"
           onKeyDown={handleKey}
           onChange={(e) => setUsername(e.target.value)}
           value={username}
-        />*/}
-        <input
-          type="text"
-          placeholder="Find a user"
         />
       </div>
       {err && <span>User not found!</span>}
       {user && (
-        <div className="userChat">
-          <img src={user.photoURL} alt="" />
+        <div className="userChat" onClick={handleSelect}>
+          <img src={user?.userProfileImage} alt="" />
           <div className="userChatInfo">
-            <span>{user.displayName}</span>
+            <span>{user?.userName}</span>
           </div>
         </div>
       )}
