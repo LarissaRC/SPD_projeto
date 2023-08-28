@@ -33,7 +33,8 @@ const Message = ({ message }) => {
         <span>Just now</span>
       </div>
       <div className="messageContent">
-        <p>{message.text}</p>
+        {/*<p>{message.text}</p>*/}
+        <p>Mensagem de teste</p>
         {/*message.img && <img src={message.img} alt="" />*/}
       </div>
     </div>
