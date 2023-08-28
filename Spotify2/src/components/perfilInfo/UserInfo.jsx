@@ -35,11 +35,9 @@ function UserInfo({ user_id }) {
             userName: userInfo?.userName,
             userProfileImage: userInfo?.userProfileImage,
           });
-          console.log("foi 1");
 
           //create empty user chats on firestore
           await setDoc(doc(db, "userChats", user_id), {});
-          console.log("foi 2");
         }
       }
       getUserInfo();
